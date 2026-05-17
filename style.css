@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+*{font-family:'Inter',sans-serif!important}
+.stApp,[data-testid="stAppViewContainer"]{background:#f0faf4;color:#1a2e1a}
+[data-testid="stSidebar"]{background:linear-gradient(180deg,#065f46,#047857,#059669)!important}
+[data-testid="stSidebar"] *{color:#fff!important}
+[data-testid="stSidebar"] hr{border-color:rgba(255,255,255,.2)!important}
+
+.card{background:#fff;border-radius:16px;padding:28px 30px;margin-bottom:20px;
+  border:1px solid #d1fae5;box-shadow:0 4px 20px rgba(5,150,105,.08)}
+.hdr{text-align:center;padding:24px 10px 16px}
+.hdr h1{font-size:2.4rem;font-weight:900;color:#065f46;margin:0}
+.hdr p{color:#4b5563;font-size:1.05rem;max-width:620px;margin:8px auto 0}
+
+.stitle{display:flex;align-items:center;gap:10px;font-size:1.1rem;font-weight:700;
+  color:#047857;margin-bottom:12px;letter-spacing:.3px}
+
+.stSlider label,[data-testid="stWidgetLabel"]{color:#1a2e1a!important;font-weight:600!important}
+.stNumberInput input{background:#f0faf4!important;border:1px solid #a7f3d0!important;
+  border-radius:10px!important;font-weight:600!important;text-align:center!important;color:#065f46!important}
+div[data-baseweb="select"]{background:#f0faf4!important;border-radius:10px!important}
+.stRadio>div{flex-direction:row!important;gap:8px!important}
+
+.stButton>button{background:linear-gradient(135deg,#059669,#047857)!important;border:none!important;
+  color:#fff!important;font-weight:700!important;font-size:1.1rem!important;
+  border-radius:14px!important;padding:14px 40px!important;width:100%;
+  box-shadow:0 4px 16px rgba(5,150,105,.3);transition:all .3s ease!important}
+.stButton>button:hover{transform:translateY(-2px) scale(1.02)!important;
+  box-shadow:0 6px 24px rgba(5,150,105,.45)!important}
+
+.r-ckd{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:2px solid #fca5a5;
+  border-radius:16px;padding:28px;margin:10px 0}
+.r-ok{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #86efac;
+  border-radius:16px;padding:28px;margin:10px 0}
+.r-title{font-size:1.5rem;font-weight:800;margin-bottom:6px}
+
+.meter-track{width:100%;height:12px;border-radius:12px;background:#e5e7eb;overflow:hidden;margin:8px 0}
+.meter-fill{height:100%;border-radius:12px;transition:width 1s ease}
+
+.fcard{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:16px;margin-bottom:12px;backdrop-filter:blur(8px)}
+.fcard .ft{font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.8px;
+  margin-bottom:4px;color:#a7f3d0}
+.fcard p{font-size:.88rem;line-height:1.5;margin:0;color:rgba(255,255,255,.85)}
+
+.insight-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:20px;margin:12px 0}
+.insight-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;
+  border-bottom:1px solid #e5e7eb}
+.insight-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.insight-text{font-size:.93rem;color:#374151;line-height:1.5}
+
+.img-banner{border-radius:16px;overflow:hidden;margin-bottom:20px;
+  box-shadow:0 4px 16px rgba(0,0,0,.08)}
+
+@media(max-width:768px){.hdr h1{font-size:1.6rem}.card{padding:18px 14px;border-radius:12px}}
+#MainMenu,footer,header{visibility:hidden}
