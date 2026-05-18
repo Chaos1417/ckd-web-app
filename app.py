@@ -14,6 +14,13 @@ css_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "style.css")
 with open(css_path, "r") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+# CSS Patch: Force radio button text to be visible in case style.css hides it
+st.markdown("""
+<style>
+.stRadio p, .stRadio label { color: #374151 !important; font-weight: 500 !important; }
+</style>
+""", unsafe_allow_html=True)
+
 # ── Sidebar ─────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("""<div style="text-align:center;padding:12px 0 4px">
@@ -93,8 +100,8 @@ u1, u2 = st.columns(2)
 with u1:
     sg = st.select_slider("Specific Gravity",
                            options=["1.005","1.010","1.015","1.020","1.025"], value="1.015")
-    # FIX: Swapped radio for selectbox
-    rbc_l = st.selectbox("Red Blood Cells (rbc)", ["Normal", "Abnormal"])
+    # Reverted to radio to match theme
+    rbc_l = st.radio("Red Blood Cells (rbc)", ["Normal","Abnormal"], horizontal=True)
     rbc = "normal" if rbc_l == "Normal" else "abnormal"
 with u2:
     rc = dual_input("RBC Count (millions/cmm)", 2.0, 8.0, 4.5, 0.1, "rc")
@@ -103,14 +110,14 @@ st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('<div class="card"><div class="stitle">📋 Medical History</div>', unsafe_allow_html=True)
 m1, m2, m3 = st.columns(3)
 with m1:
-    # FIX: Swapped radio for selectbox
-    htn = "yes" if st.selectbox("Hypertension", ["No", "Yes"], key="htn_r") == "Yes" else "no"
+    # Reverted to radio to match theme
+    htn = "yes" if st.radio("Hypertension", ["No","Yes"], horizontal=True, key="htn_r") == "Yes" else "no"
 with m2:
-    # FIX: Swapped radio for selectbox
-    dm = "yes" if st.selectbox("Diabetes Mellitus", ["No", "Yes"], key="dm_r") == "Yes" else "no"
+    # Reverted to radio to match theme
+    dm = "yes" if st.radio("Diabetes Mellitus", ["No","Yes"], horizontal=True, key="dm_r") == "Yes" else "no"
 with m3:
-    # FIX: Swapped radio for selectbox
-    pe = "yes" if st.selectbox("Pedal Edema", ["No", "Yes"], key="pe_r") == "Yes" else "no"
+    # Reverted to radio to match theme
+    pe = "yes" if st.radio("Pedal Edema", ["No","Yes"], horizontal=True, key="pe_r") == "Yes" else "no"
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ── Static Insights Fallback ────────────────────────────────────────────────
@@ -236,7 +243,6 @@ the patient's specific abnormal values with their numbers. Be empathetic and edu
 End with one actionable recommendation. Do not use markdown formatting."""
 
     try:
-        # Debug: Check if key is actually loaded
         api_key = st.secrets.get("GROQ_API_KEY", os.environ.get("GROQ_API_KEY", ""))
         
         if not api_key:
@@ -246,7 +252,7 @@ End with one actionable recommendation. Do not use markdown formatting."""
             client = Groq(api_key=api_key)
             with st.spinner("🧠 AI Doctor is analyzing your results..."):
                 resp = client.chat.completions.create(
-                    model="llama3-8b-8192", # Try "llama-3.1-8b-instant" if this specific model throws an error
+                    model="llama-3.1-8b-instant", # FIX: Updated to current supported model
                     messages=[{"role": "system", "content": "You are a concise, empathetic medical AI."},
                               {"role": "user", "content": prompt}],
                     temperature=0.4, max_tokens=300)
@@ -258,7 +264,6 @@ End with one actionable recommendation. Do not use markdown formatting."""
             </div>""", unsafe_allow_html=True)
 
     except Exception as e:
-        # FIX: Actually print the error to the screen so we can debug it
         st.error(f"🚨 Groq API Error: {str(e)}")
         _show_static_insights(hemo, sc, bu, bgr, sod, pcv, rc, rbc, htn, dm, pe, sg, is_ckd, tc)
 
